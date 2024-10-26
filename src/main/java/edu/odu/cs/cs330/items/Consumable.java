@@ -38,7 +38,9 @@ public class Consumable extends Item {
      */
     public Consumable(Consumable src)
     {
-
+        super(src.name);
+        this.effect = src.effect;
+        this.uses = src.uses;
     }
 
     /**
@@ -105,7 +107,7 @@ public class Consumable extends Item {
     public Item clone()
     {
         // Replace the next line
-        return null;
+        return new Consumable(this);
     }
 
     /**
@@ -114,16 +116,11 @@ public class Consumable extends Item {
      * @param rhs object for which a comparison is desired
      */
     @Override
-    public boolean equals(Object rhs)
-    {
-        if (!(rhs instanceof Consumable)) {
-            return false;
-        }
-
-        Consumable rhsItem = (Consumable) rhs;
-
-        // Replace the next line
-        return false;
+    public boolean equals(Object rhs) {
+        if (!(rhs instanceof Consumable)) return false;
+        Consumable other = (Consumable) rhs;
+        return this.name.equals(other.name) &&
+               this.effect.equals(other.effect);
     }
 
     /**
@@ -136,7 +133,7 @@ public class Consumable extends Item {
     public int hashCode()
     {
         // Replace the next line
-        return -1;
+        return this.name.hashCode() + this.effect.hashCode();
     }
 
     /**
@@ -145,6 +142,6 @@ public class Consumable extends Item {
     @Override
     public String toString()
     {
-        return "";
+        return String.format("Consumable {Name: %s, Effect: %s, Uses: %d}", this.name, this.effect, this.uses);
     }
 }

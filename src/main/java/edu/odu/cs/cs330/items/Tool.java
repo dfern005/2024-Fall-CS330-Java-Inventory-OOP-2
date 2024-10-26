@@ -57,7 +57,12 @@ public class Tool extends Item {
      */
     public Tool(Tool src)
     {
-
+        super(src.name);
+        this.durability = src.durability;
+        this.speed = src.speed;
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modifierLevel = src.modifierLevel;
     }
 
     /**
@@ -173,6 +178,12 @@ public class Tool extends Item {
     public void read(Scanner snr)
     {
         // Complete this method
+        this.name = snr.next();
+        this.durability = snr.nextInt();
+        this.speed = snr.nextInt();
+        this.material = snr.next();
+        this.modifier = snr.next();
+        this.modifierLevel = snr.nextInt();
     }
 
     /**
@@ -190,16 +201,12 @@ public class Tool extends Item {
      * @param rhs object for which a comparison is desired
      */
     @Override
-    public boolean equals(Object rhs)
-    {
-        if (!(rhs instanceof Tool)) {
-            return false;
-        }
-
-        Tool rhsItem = (Tool) rhs;
-
-        // Replace the next line
-        return false;
+    public boolean equals(Object rhs) {
+        if (!(rhs instanceof Tool)) return false;
+        Tool other = (Tool) rhs;
+        return this.name.equals(other.name) &&
+               this.material.equals(other.material) &&
+               this.modifier.equals(other.modifier);
     }
 
     /**
@@ -220,6 +227,7 @@ public class Tool extends Item {
     @Override
     public String toString()
     {
-        return "";
+        return String.format("Tool {Name: %s, Durability: %d, Speed: %d, Material: %s, Modifier: %s, Modifier Level: %d}",
+        this.name, this.durability, this.speed, this.material, this.modifier, this.modifierLevel);
     }
 }
